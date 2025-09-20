@@ -1,18 +1,18 @@
 // Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Navigation and scroll functions
     const navbar = document.querySelector('.navbar');
     const navLinks = document.querySelectorAll('.nav-links a');
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-links');
     const scrollTopBtn = document.querySelector('.scroll-to-top');
-    
+
     // Hamburger menu toggle
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
     });
-    
+
     // Close menu when clicking on a nav link
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu.classList.remove('active');
         });
     });
-    
+
     // Highlight active nav item and change navbar background on scroll
     function handleScroll() {
         // Add background to navbar on scroll
@@ -31,25 +31,25 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.style.padding = '20px 0';
             navbar.style.boxShadow = 'none';
         }
-        
+
         // Show or hide scroll-to-top button
         if (window.scrollY > 500) {
             scrollTopBtn.classList.add('active');
         } else {
             scrollTopBtn.classList.remove('active');
         }
-        
+
         // Update active nav link based on scroll position
         const sections = document.querySelectorAll('section');
         let current = '';
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop - 100;
             if (scrollY >= sectionTop) {
                 current = section.getAttribute('id');
             }
         });
-        
+
         navLinks.forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href') === `#${current}`) {
@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     window.addEventListener('scroll', handleScroll);
-    
+
     // Scroll to top button
     scrollTopBtn.addEventListener('click', () => {
         window.scrollTo({
@@ -67,23 +67,23 @@ document.addEventListener('DOMContentLoaded', function() {
             behavior: 'smooth'
         });
     });
-    
+
     // Project filtering
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
-    
+
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             // Remove active class from all buttons
             filterBtns.forEach(filterBtn => {
                 filterBtn.classList.remove('active');
             });
-            
+
             // Add active class to clicked button
             btn.classList.add('active');
-            
+
             const filterValue = btn.getAttribute('data-filter');
-            
+
             projectCards.forEach(card => {
                 if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
                     card.style.display = 'block';
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
-    
+
     // Animate skill bars
     function animateSkillBars() {
         const skillBars = document.querySelectorAll('.skill-level');
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
         });
     }
-    
+
     // Animate statistic numbers
     function animateStats() {
         const stats = document.querySelectorAll('.stat-number');
@@ -122,71 +122,71 @@ document.addEventListener('DOMContentLoaded', function() {
             let count = 0;
             const time = 2000; // 2 seconds animation
             const interval = Math.floor(time / target);
-            
+
             const counter = setInterval(() => {
                 count++;
                 stat.textContent = count;
-                
+
                 if (count === target) {
                     clearInterval(counter);
                 }
             }, interval);
         });
     }
-    
+
     // Intersection Observer for animations
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate');
-                
+
                 // Trigger specific animations for different sections
                 if (entry.target.id === 'skills') {
                     animateSkillBars();
                 }
-                
+
                 if (entry.target.id === 'summary') {
                     animateStats();
                 }
             }
         });
     }, { threshold: 0.3 });
-    
+
     sections.forEach(section => {
         observer.observe(section);
     });
-    
+
     // Form submission handler
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Basic form validation
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
-            
+
             if (!name || !email || !subject || !message) {
                 alert('Please fill in all fields');
                 return;
             }
-            
+
             // Construct WhatsApp message
             const whatsappMessage = `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`;
             const encodedMessage = encodeURIComponent(whatsappMessage);
             const whatsappURL = `https://wa.me/919150908294?text=${encodedMessage}`;
-            
+
             // Open WhatsApp chat in a new tab
             window.open(whatsappURL, '_blank');
-            
+
             // Optionally clear the form after submission
             // contactForm.reset();
         });
     }
-    
+
     // Typing effect for hero section
     function typeEffect() {
         const professionElement = document.querySelector('.profession');
@@ -196,10 +196,10 @@ document.addEventListener('DOMContentLoaded', function() {
             let charIndex = 0;
             let isDeleting = false;
             let typingSpeed = 100;
-            
+
             function type() {
                 const currentProfession = professions[professionIndex];
-                
+
                 if (isDeleting) {
                     charIndex--;
                     typingSpeed = 50;
@@ -207,9 +207,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     charIndex++;
                     typingSpeed = 150;
                 }
-                
+
                 professionElement.textContent = currentProfession.substring(0, charIndex);
-                
+
                 if (!isDeleting && charIndex === currentProfession.length) {
                     isDeleting = true;
                     typingSpeed = 1500; // Pause at the end
@@ -217,30 +217,30 @@ document.addEventListener('DOMContentLoaded', function() {
                     isDeleting = false;
                     professionIndex = (professionIndex + 1) % professions.length;
                 }
-                
+
                 setTimeout(type, typingSpeed);
             }
-            
+
             // Start the typing effect
             setTimeout(type, 1000);
         }
     }
-    
+
     // Initialize typing effect
     typeEffect();
-    
+
     // Apply smooth scrolling for all anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
+
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 const offsetTop = targetElement.offsetTop - 80;
-                
+
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
@@ -248,10 +248,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // Add animations to the timeline items
     const timelineItems = document.querySelectorAll('.timeline-item');
-    
+
     const timelineObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -259,14 +259,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, { threshold: 0.2 });
-    
+
     timelineItems.forEach(item => {
         timelineObserver.observe(item);
         // Add initial styles
         item.style.opacity = '0';
         item.style.transform = 'translateY(30px)';
     });
-    
+
     // Add CSS for the animation
     const style = document.createElement('style');
     style.textContent = `
@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     `;
     document.head.appendChild(style);
-    
+
     // Preloader
     function addPreloader() {
         // Create preloader
@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
         document.body.prepend(preloader);
-        
+
         // Add preloader styles
         const preloaderStyle = document.createElement('style');
         preloaderStyle.textContent = `
@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         `;
         document.head.appendChild(preloaderStyle);
-        
+
         // Hide preloader after content loads
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -397,30 +397,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         });
     }
-    
+
     // Add the preloader
     addPreloader();
-    
+
     // Add scroll reveal animations
     function initScrollReveal() {
         const projectCards = document.querySelectorAll('.project-card');
         const educationCards = document.querySelectorAll('.education-card');
         const infoCards = document.querySelectorAll('.info-card');
         const statCards = document.querySelectorAll('.stat-card');
-        
+
         const scrollElements = [
-            ...projectCards, 
-            ...educationCards, 
-            ...infoCards, 
+            ...projectCards,
+            ...educationCards,
+            ...infoCards,
             ...statCards
         ];
-        
+
         scrollElements.forEach((element, index) => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(30px)';
             element.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
         });
-        
+
         const scrollRevealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -429,25 +429,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }, { threshold: 0.1 });
-        
+
         scrollElements.forEach(element => {
             scrollRevealObserver.observe(element);
         });
     }
-    
+
     // Initialize scroll reveal animations
     initScrollReveal();
-    
+
     // Contact form validation
     function validateContactForm() {
         const form = document.getElementById('contactForm');
         if (!form) return;
-        
+
         const nameInput = document.getElementById('name');
         const emailInput = document.getElementById('email');
         const subjectInput = document.getElementById('subject');
         const messageInput = document.getElementById('message');
-        
+
         // Create error message element
         function createErrorElement(message) {
             const error = document.createElement('div');
@@ -458,13 +458,13 @@ document.addEventListener('DOMContentLoaded', function() {
             error.style.marginTop = '5px';
             return error;
         }
-        
+
         // Validate email format
         function isValidEmail(email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
         }
-        
+
         // Event listeners for real-time validation
         nameInput.addEventListener('blur', () => {
             const errorElement = nameInput.parentElement.querySelector('.error-message');
@@ -480,7 +480,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 nameInput.style.borderColor = '#e9ecef';
             }
         });
-        
+
         emailInput.addEventListener('blur', () => {
             const errorElement = emailInput.parentElement.querySelector('.error-message');
             if (emailInput.value.trim() === '') {
@@ -502,7 +502,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 emailInput.style.borderColor = '#e9ecef';
             }
         });
-        
+
         subjectInput.addEventListener('blur', () => {
             const errorElement = subjectInput.parentElement.querySelector('.error-message');
             if (subjectInput.value.trim() === '') {
@@ -517,7 +517,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 subjectInput.style.borderColor = '#e9ecef';
             }
         });
-        
+
         messageInput.addEventListener('blur', () => {
             const errorElement = messageInput.parentElement.querySelector('.error-message');
             if (messageInput.value.trim() === '') {
@@ -533,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Initialize form validation
     validateContactForm();
 
