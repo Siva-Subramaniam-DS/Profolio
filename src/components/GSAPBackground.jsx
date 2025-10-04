@@ -21,8 +21,8 @@ const GSAPBackground = () => {
         height: ${Math.random() * 40 + 20}px;
         border-radius: 50%;
         background: linear-gradient(135deg, 
-          rgba(67, 97, 238, ${Math.random() * 0.3 + 0.1}), 
-          rgba(76, 201, 240, ${Math.random() * 0.3 + 0.1})
+          rgba(67, 97, 238, ${Math.random() * 0.6 + 0.3}), 
+          rgba(76, 201, 240, ${Math.random() * 0.6 + 0.3})
         );
         backdrop-filter: blur(1px);
         pointer-events: none;
@@ -65,7 +65,7 @@ const GSAPBackground = () => {
 
       // Opacity pulse
       gsap.to(particle, {
-        opacity: Math.random() * 0.5 + 0.3,
+        opacity: Math.random() * 0.7 + 0.5,
         duration: Math.random() * 3 + 2,
         repeat: -1,
         yoyo: true,
@@ -87,8 +87,8 @@ const GSAPBackground = () => {
         position: absolute;
         width: ${size}px;
         height: ${size}px;
-        border: 2px solid rgba(67, 97, 238, 0.1);
-        background: rgba(76, 201, 240, 0.05);
+        border: 2px solid rgba(67, 97, 238, 0.3);
+        background: rgba(76, 201, 240, 0.2);
         ${isCircle ? 'border-radius: 50%;' : `border-radius: ${Math.random() * 20}px;`}
         pointer-events: none;
       `;
@@ -147,8 +147,9 @@ const GSAPBackground = () => {
         width: '100%',
         height: '100%',
         overflow: 'hidden',
-        zIndex: -1,
-        pointerEvents: 'none'
+        zIndex: -10,
+        pointerEvents: 'none',
+        background: 'radial-gradient(ellipse at center, rgba(67, 97, 238, 0.03) 0%, rgba(76, 201, 240, 0.02) 50%, transparent 100%)'
       }}
     />
   );

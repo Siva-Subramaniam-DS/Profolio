@@ -122,6 +122,8 @@ body {
     color: var(--text-color);
     background: var(--background-color);
     transition: var(--transition);
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .container {
@@ -129,6 +131,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 a {
@@ -149,6 +153,8 @@ img {
 section {
     padding: 80px 0;
     background: var(--background-color);
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .section-title {
@@ -274,6 +280,8 @@ section {
     box-shadow: var(--shadow);
     transition: var(--transition);
     border-bottom: 1px solid var(--border-color);
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .navbar .container {
@@ -521,6 +529,8 @@ section {
     background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8)), url('https://source.unsplash.com/random/1920x1080/?tech') no-repeat center center/cover;
     position: relative;
     overflow: hidden;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .hero::before {
@@ -539,12 +549,16 @@ section {
     align-items: center;
     justify-content: space-between;
     position: relative;
-    z-index: 1;
+    z-index: 10;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .hero-content {
     flex: 1;
     padding-right: 30px;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .hero-content h1 {
@@ -556,6 +570,8 @@ section {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .hero-content .profession {
@@ -563,6 +579,8 @@ section {
     font-weight: 500;
     color: var(--text-color);
     margin-bottom: 20px;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .hero-text {
@@ -570,6 +588,8 @@ section {
     font-size: 1.1rem;
     color: var(--text-color);
     max-width: 500px;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .cta-buttons {
@@ -3090,13 +3110,15 @@ section {
 }
 
 .main-content {
-  opacity: 1;
+  opacity: 1 !important;
   transform: translateY(0);
+  visibility: visible !important;
 }
 
 .main-content.loaded {
-  opacity: 1;
+  opacity: 1 !important;
   transform: translateY(0);
+  visibility: visible !important;
 }
 
 /* Typewriter Effect */
