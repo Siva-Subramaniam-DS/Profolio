@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import './styles.css';
 import { ThemeProvider } from './context/ThemeContext';
+import SecurityProvider from './components/SecurityProvider';
+import devToolsProtection from './utils/devtools-protection';
 import { useGSAP } from './hooks/useGSAP';
 import GSAPBackground from './components/GSAPBackground';
 import Navbar from './components/Navbar';
@@ -77,46 +79,48 @@ function App() {
   }, [animateNavbar, animateHero, initScrollAnimations, initHoverAnimations, pageTransition, cleanup]);
 
   return (
-    <ThemeProvider>
-      <div ref={containerRef} className="app-container">
-        <GSAPBackground />
-        
-        <Navbar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-        
-        <main className={`main-content ${isLoaded ? 'loaded' : ''}`}>
-          <div className="animate-on-scroll">
-            <Hero />
-          </div>
-          <div className="animate-on-scroll">
-            <About />
-          </div>
-          <div className="animate-on-scroll">
-            <Skills />
-          </div>
-          <div className="animate-on-scroll">
-            <Experience />
-          </div>
-          <div className="animate-on-scroll">
-            <Education />
-          </div>
-          <div className="animate-on-scroll">
-            <Projects />
-          </div>
-          <div className="animate-on-scroll">
-            <Additional />
-          </div>
-          <div className="animate-on-scroll">
-            <Summary />
-          </div>
-          <div className="animate-on-scroll">
-            <Contact />
-          </div>
-        </main>
-        
-        <Footer />
-        <ScrollToTop />
-      </div>
-    </ThemeProvider>
+    <SecurityProvider>
+      <ThemeProvider>
+        <div ref={containerRef} className="app-container">
+          <GSAPBackground />
+          
+          <Navbar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+          
+          <main className={`main-content ${isLoaded ? 'loaded' : ''}`}>
+            <div className="animate-on-scroll">
+              <Hero />
+            </div>
+            <div className="animate-on-scroll">
+              <About />
+            </div>
+            <div className="animate-on-scroll">
+              <Skills />
+            </div>
+            <div className="animate-on-scroll">
+              <Experience />
+            </div>
+            <div className="animate-on-scroll">
+              <Education />
+            </div>
+            <div className="animate-on-scroll">
+              <Projects />
+            </div>
+            <div className="animate-on-scroll">
+              <Additional />
+            </div>
+            <div className="animate-on-scroll">
+              <Summary />
+            </div>
+            <div className="animate-on-scroll">
+              <Contact />
+            </div>
+          </main>
+          
+          <Footer />
+          <ScrollToTop />
+        </div>
+      </ThemeProvider>
+    </SecurityProvider>
   );
 }
 
