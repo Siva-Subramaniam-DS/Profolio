@@ -1,0 +1,12 @@
+[phases.setup]
+nixPkgs = ["nodejs-18_x"]
+
+[phases.install]
+# Use npm install instead of npm ci to ensure optional dependencies are installed
+# npm install respects package-lock.json when present, so it's still deterministic
+# but it will install optional dependencies that npm ci skips
+cmds = ["npm install"]
+
+[phases.build]
+cmds = ["npm run build"]
+
