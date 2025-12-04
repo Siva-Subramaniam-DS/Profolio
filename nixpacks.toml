@@ -2,10 +2,14 @@
 nixPkgs = ["nodejs-18_x"]
 
 [phases.install]
-# Use npm install instead of npm ci to ensure optional dependencies are installed
-# npm install respects package-lock.json when present, so it's still deterministic
-# but it will install optional dependencies that npm ci skips
-cmds = ["npm install"]
+# Clean install to fix Rollup native module issues
+# As per error message: remove package-lock.json and node_modules for fresh install
+# This ensures platform-specific optional dependencies (Rollup native bindings) are installed
+cmds = [
+  "rm -rf node_modules package-lock.json || true",
+  "npm install",
+  "npm rebuild || true"
+]
 
 [phases.build]
 cmds = ["npm run build"]
