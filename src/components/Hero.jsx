@@ -4,43 +4,6 @@ import { useTypewriter } from '../hooks/useTypewriter';
 import { gsap } from 'gsap';
 import P1Image from '../assets/P1.jpg';
 
-// Simple typewriter hook fallback
-const useSimpleTypewriter = (texts = [], speed = 100) => {
-  const [displayText, setDisplayText] = React.useState('');
-  const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [isDeleting, setIsDeleting] = React.useState(false);
-  const [charIndex, setCharIndex] = React.useState(0);
-
-  React.useEffect(() => {
-    if (!texts.length) return;
-
-    const currentText = texts[currentIndex];
-    
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (charIndex < currentText.length) {
-          setDisplayText(currentText.slice(0, charIndex + 1));
-          setCharIndex(prev => prev + 1);
-        } else {
-          setTimeout(() => setIsDeleting(true), 1000);
-        }
-      } else {
-        if (charIndex > 0) {
-          setDisplayText(currentText.slice(0, charIndex - 1));
-          setCharIndex(prev => prev - 1);
-        } else {
-          setIsDeleting(false);
-          setCurrentIndex(prev => (prev + 1) % texts.length);
-        }
-      }
-    }, isDeleting ? speed / 2 : speed);
-
-    return () => clearTimeout(timeout);
-  }, [texts, currentIndex, charIndex, isDeleting, speed]);
-
-  return displayText;
-};
-
 const Hero = () => {
   const { content } = useTheme();
   const heroRef = useRef(null);

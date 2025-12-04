@@ -8,6 +8,7 @@ class DevToolsProtection {
     this.isEnabled = false;
     this.checkInterval = null;
     this.devtoolsOpen = false;
+    this.debuggerCheckInterval = null;
   }
 
   init() {
@@ -89,12 +90,10 @@ class DevToolsProtection {
   // Detect if DevTools is open
   detectDevTools() {
     const element = new Image();
-    let devtoolsOpen = false;
     
     // Define a custom toString method
     Object.defineProperty(element, 'id', {
       get: () => {
-        devtoolsOpen = true;
         this.handleDevToolsOpen();
         return 'devtools-detector';
       }
@@ -102,7 +101,6 @@ class DevToolsProtection {
 
     // Check periodically
     this.checkInterval = setInterval(() => {
-      devtoolsOpen = false;
       console.log('%c', element);
       console.clear();
       
@@ -115,14 +113,15 @@ class DevToolsProtection {
       }
     }, 1000);
 
-    // Detect using debugger timing
-    let startTime = new Date();
-    debugger;
-    let endTime = new Date();
-    
-    if (endTime - startTime > 100) {
-      this.handleDevToolsOpen();
-    }
+    // Detect using timing (without debugger statement)
+    let startTime = performance.now();
+    // Use a small delay to detect timing differences
+    setTimeout(() => {
+      let endTime = performance.now();
+      if (endTime - startTime > 200) {
+        this.handleDevToolsOpen();
+      }
+    }, 0);
   }
 
   // Disable console methods
@@ -176,14 +175,16 @@ class DevToolsProtection {
 
   // Detect debugger attempts
   detectDebugger() {
-    setInterval(() => {
+    this.debuggerCheckInterval = setInterval(() => {
       const startTime = performance.now();
-      debugger;
-      const endTime = performance.now();
-      
-      if (endTime - startTime > 100) {
-        this.handleDevToolsOpen();
-      }
+      // Use a timing-based approach instead of debugger statement
+      // This checks if execution is paused by checking timing differences
+      setTimeout(() => {
+        const endTime = performance.now();
+        if (endTime - startTime > 200) {
+          this.handleDevToolsOpen();
+        }
+      }, 0);
     }, 2000);
   }
 
@@ -270,6 +271,9 @@ class DevToolsProtection {
   destroy() {
     if (this.checkInterval) {
       clearInterval(this.checkInterval);
+    }
+    if (this.debuggerCheckInterval) {
+      clearInterval(this.debuggerCheckInterval);
     }
     this.isEnabled = false;
   }

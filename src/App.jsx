@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import './styles.css';
 import { ThemeProvider } from './context/ThemeContext';
 import SecurityProvider from './components/SecurityProvider';
-import devToolsProtection from './utils/devtools-protection';
 import { useGSAP } from './hooks/useGSAP';
 import GSAPBackground from './components/GSAPBackground';
 import Navbar from './components/Navbar';
@@ -22,23 +21,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   
-  // Add error handling for GSAP
-  let gsapHook = null;
-  try {
-    gsapHook = useGSAP();
-  } catch (error) {
-    console.warn('GSAP animations not available:', error);
-    gsapHook = {
-      containerRef: { current: null },
-      initScrollAnimations: () => {},
-      animateHero: () => {},
-      animateNavbar: () => {},
-      initHoverAnimations: () => {},
-      pageTransition: () => {},
-      cleanup: () => {}
-    };
-  }
-
+  // Call hook unconditionally at the top level (React Rules of Hooks)
   const { 
     containerRef, 
     initScrollAnimations, 
@@ -47,7 +30,7 @@ function App() {
     initHoverAnimations,
     pageTransition,
     cleanup 
-  } = gsapHook;
+  } = useGSAP();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);

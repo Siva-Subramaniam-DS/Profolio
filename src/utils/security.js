@@ -23,8 +23,8 @@ export const validateEmail = (email) => {
 
 // Phone number validation
 export const validatePhone = (phone) => {
-  const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-  return phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
+  const phoneRegex = /^[+]?[1-9][\d]{0,15}$/;
+  return phoneRegex.test(phone.replace(/[\s\-()]/g, ''));
 };
 
 // Rate limiting for form submissions
