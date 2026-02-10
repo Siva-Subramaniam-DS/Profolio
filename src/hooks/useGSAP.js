@@ -122,30 +122,23 @@ export const useGSAP = () => {
   const animateHero = () => {
     const tl = gsap.timeline();
     
-    tl.fromTo('.hero-content h1', 
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power2.out" }
-    )
-    .fromTo('.hero-content h3', 
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-      "-=0.5"
-    )
-    .fromTo('.hero-content p', 
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-      "-=0.4"
-    )
-    .fromTo('.cta-buttons', 
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-      "-=0.3"
-    )
-    .fromTo('.social-icons', 
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-      "-=0.2"
-    );
+    // Helper to add a timeline step only if the selector exists
+    const addIfExists = (selector, fromVars, toVars, position) => {
+      try {
+        const el = document.querySelector(selector);
+        if (el) {
+          tl.fromTo(selector, fromVars, toVars, position);
+        }
+      } catch (e) {
+        // ignore invalid selectors
+      }
+    };
+
+    addIfExists('.hero-content h1', { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power2.out" });
+    addIfExists('.hero-content h3', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, "-=0.5");
+    addIfExists('.hero-content p', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, "-=0.4");
+    addIfExists('.cta-buttons', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, "-=0.3");
+    addIfExists('.social-icons', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, "-=0.2");
 
     return tl;
   };

@@ -16,6 +16,7 @@ const Navbar = ({ isMenuOpen, toggleMenu }) => {
             <li><a href="#experience">Experience</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#projects">Projects</a></li>
+            <li><a href="#blog">Blog</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
           <div className="hamburger" onClick={toggleMenu}>

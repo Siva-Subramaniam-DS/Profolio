@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { useTypewriter } from '../hooks/useTypewriter';
 import { gsap } from 'gsap';
-import P1Image from '../assets/P1.png';
+import P1Image from '../assets/P1.jpeg';
 
 const Hero = () => {
   const { content } = useTheme();
