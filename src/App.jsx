@@ -17,20 +17,21 @@ import Summary from './components/Summary';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import MusicPlayer from './components/MusicPlayer';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
   // Call hook unconditionally at the top level (React Rules of Hooks)
-  const { 
-    containerRef, 
-    initScrollAnimations, 
-    animateHero, 
-    animateNavbar, 
+  const {
+    containerRef,
+    initScrollAnimations,
+    animateHero,
+    animateNavbar,
     initHoverAnimations,
     pageTransition,
-    cleanup 
+    cleanup
   } = useGSAP();
 
   const toggleMenu = () => {
@@ -67,9 +68,9 @@ function App() {
       <ThemeProvider>
         <div ref={containerRef} className="app-container">
           <GSAPBackground />
-          
+
           <Navbar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-          
+
           <main className={`main-content ${isLoaded ? 'loaded' : ''}`}>
             <div className="animate-on-scroll">
               <Hero />
@@ -102,9 +103,10 @@ function App() {
               <Contact />
             </div>
           </main>
-          
+
           <Footer />
           <ScrollToTop />
+          <MusicPlayer />
         </div>
       </ThemeProvider>
     </SecurityProvider>

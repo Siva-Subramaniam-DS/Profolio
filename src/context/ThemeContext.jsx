@@ -44,6 +44,7 @@ export const themes = {
       projectsTitle: "PROJECTS",
       additionalTitle: "ADDITIONAL INFORMATION",
       summaryTitle: "SUMMARY",
+      blogTitle: "BLOG & EVENTS",
       contactTitle: "CONTACT ME",
       footerTagline: "AI & ML Engineer"
     }
@@ -81,6 +82,7 @@ export const themes = {
       projectsTitle: "INNOVATIONS",
       additionalTitle: "TECH INSIGHTS",
       summaryTitle: "DEVELOPER OVERVIEW",
+      blogTitle: "TECH INSIGHTS",
       contactTitle: "GET IN TOUCH",
       footerTagline: "Innovation Through Code"
     }
@@ -118,6 +120,7 @@ export const themes = {
       projectsTitle: "DISCOVERIES",
       additionalTitle: "TREASURE CHEST",
       summaryTitle: "CAPTAIN'S LOG",
+      blogTitle: "STORY BOARD",
       contactTitle: "CHART A COURSE",
       footerTagline: "Navigating AI Waters"
     }
@@ -155,6 +158,7 @@ export const themes = {
       projectsTitle: "MASTERPIECES",
       additionalTitle: "INSPIRATION GALLERY",
       summaryTitle: "ARTIST'S STATEMENT",
+      blogTitle: "CREATIVE THOUGHTS",
       contactTitle: "COMMISSION WORK",
       footerTagline: "Artistry in AI"
     }
@@ -192,6 +196,7 @@ export const themes = {
       projectsTitle: "HARVEST",
       additionalTitle: "ECOSYSTEM",
       summaryTitle: "FOREST OVERVIEW",
+      blogTitle: "GROWTH STORIES",
       contactTitle: "PLANT SEEDS",
       footerTagline: "Growing Green Tech"
     }
@@ -229,6 +234,7 @@ export const themes = {
       projectsTitle: "CONSTELLATIONS",
       additionalTitle: "GALACTIC INFO",
       summaryTitle: "COSMIC OVERVIEW",
+      blogTitle: "ASTRO CHRONICLES",
       contactTitle: "SIGNAL THE STARS",
       footerTagline: "Reaching for the Stars"
     }
@@ -254,7 +260,7 @@ export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     const theme = themes[currentTheme];
     const root = document.documentElement;
-    
+
     Object.entries(theme.colors).forEach(([property, value]) => {
       root.style.setProperty(property, value);
     });

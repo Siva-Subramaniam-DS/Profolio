@@ -71,11 +71,11 @@ const Summary = () => {
               <div className="stat-label">Years Experience</div>
             </div>
             <div className="stat-card hover-lift">
-              <div className="stat-number" data-count="15">15</div>
+              <div className="stat-number" data-count="20">20</div>
               <div className="stat-label">Projects Completed</div>
             </div>
             <div className="stat-card hover-lift">
-              <div className="stat-number" data-count="5">5</div>
+              <div className="stat-number" data-count="10">10</div>
               <div className="stat-label">Happy Clients</div>
             </div>
             <div className="stat-card hover-lift">

@@ -1,30 +1,37 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import { soundManager } from '../utils/soundUtils';
 
 const ThemeSwitcher = () => {
   const { currentTheme, themes, switchTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
+  const toggleOpen = () => {
+    soundManager.playClick();
+    setIsOpen(!isOpen);
+  };
+
   const handleThemeChange = (themeName) => {
+    soundManager.playPop();
     switchTheme(themeName);
     setIsOpen(false);
   };
 
   return (
     <div className="theme-switcher">
-      <button 
+      <button
         className="theme-toggle-btn"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleOpen}
         aria-label="Switch Theme"
       >
         <i className={themes[currentTheme].icon}></i>
       </button>
-      
+
       {isOpen && (
         <div className="theme-dropdown">
           <div className="theme-dropdown-header">
             <h4>Choose Theme</h4>
-            <button 
+            <button
               className="close-btn"
               onClick={() => setIsOpen(false)}
             >
@@ -39,16 +46,16 @@ const ThemeSwitcher = () => {
                 onClick={() => handleThemeChange(key)}
               >
                 <div className="theme-preview">
-                  <div 
-                    className="theme-color-primary" 
+                  <div
+                    className="theme-color-primary"
                     style={{ backgroundColor: theme.colors['--primary-color'] }}
                   ></div>
-                  <div 
-                    className="theme-color-secondary" 
+                  <div
+                    className="theme-color-secondary"
                     style={{ backgroundColor: theme.colors['--secondary-color'] }}
                   ></div>
-                  <div 
-                    className="theme-color-accent" 
+                  <div
+                    className="theme-color-accent"
                     style={{ backgroundColor: theme.colors['--accent-color'] }}
                   ></div>
                 </div>
@@ -66,7 +73,7 @@ const ThemeSwitcher = () => {
           </div>
         </div>
       )}
-      
+
       {isOpen && <div className="theme-overlay" onClick={() => setIsOpen(false)}></div>}
     </div>
   );
