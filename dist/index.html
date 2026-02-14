@@ -6,12 +6,13 @@
     
     <!-- Security Meta Tags -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
     
     <!-- Content Security Policy -->
+    <!-- Content Security Policy: For reliable enforcement, set this header on the HTTP response in your server/config.
+         Removed 'frame-ancestors' directive here because it is ignored when delivered via a <meta> element. -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
         script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;
@@ -23,7 +24,6 @@
         object-src 'none';
         base-uri 'self';
         form-action 'self' https://wa.me;
-        frame-ancestors 'none';
         upgrade-insecure-requests;
     ">
     
@@ -63,8 +63,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <script type="module" crossorigin src="/assets/index-DddY_6I_.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-DGhlRa8G.css">
+  <script type="module" crossorigin src="/assets/index-1yUh0rql.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DnJ83_bt.css">
 </head>
 <body>
     <!-- Security Notice (Hidden) -->
